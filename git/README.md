@@ -5,15 +5,16 @@
 
 ## Practie 01
 - Open the Git bash cli and create folder with your name
+- Create an app, better based on python and flask web server
 - Do the below steps
 ```
-echo "my new file" > newfile.txt
+echo "my new file" > myapp.py
 ls
 git status
-git add newfile.txt
-cat newfile.txt
+git add myapp.py
+cat myapp.py
 git status
-git commit -m "new file"
+git commit -m "myapp.py"
 git status
 
 ```
@@ -23,7 +24,7 @@ git status
 - **Git diff** see the differences between commits
   
 ```
-git mv newfile.txt newfile01.txt
+git mv myapp.py myapp-new.py
 git status
 git commit -m "rename"
 git log
