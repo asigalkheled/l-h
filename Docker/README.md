@@ -17,3 +17,20 @@ docker stop <Container ID>
 - Go inside a running mysql container​
 - Go to Cli of mysql and show all database
 - select * from user ​
+
+```
+docker pull mysql
+docker run --name test-mysql -e MYSQL_ROOT_PASSWORD=strong_password -d mysql
+docker run --name test-mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=strong_password -d mysql
+
+   #Run mysql tag version 5  
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=mySchema mysql:5
+docker exec -it mysql bash
+docker exec -it test-mysql bash
+mysql -u root -p
+strong_password
+use mysql;
+show tables;
+select * from user
+select User from user;
+```
