@@ -16,6 +16,11 @@ http://localhost:5024
 
   - Run the docker top, stats, inspect commands
   - Copy the index.html file from docker container to your host, one dir back
+
+## Solution: Hands-On - Docker Argument port
+```
+echo "<h1>Docker Argument port</h1>" > index.html
+```
     
 # Hands-On– Lab-03-Basic Commands based on Jenkins
 
