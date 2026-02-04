@@ -4,7 +4,7 @@
 - Roadmap DevOps 2026
 
 ## Homework - see the Podcast
-  - TBD
+  - https://www.youtube.com/watch?v=SCZQFmFDugQ
 
 - Install GitBash, WSL , OracleVM 
 - Make sure you have GitHub user
