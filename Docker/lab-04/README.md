@@ -8,6 +8,7 @@
 - Go into nt01 container and ping to nt03 or nt04
 
 ```
+docker network ls
 docker network create -d bridge mynet
 docker network inspect mynet
 ```
