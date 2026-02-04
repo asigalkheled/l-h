@@ -21,7 +21,12 @@ http://localhost:5024
 ```
 echo "<h1>Docker Argument port</h1>" > index.html
 ```
+- Clean up if needed all the Docker containers and docker images
 
+```
+docker rm -f $(docker ps -a -q)
+docker rmi -f $(docker images -q)
+```
 ```
 docker build -t html-server .
 docker run -d   --name web5023   -e PORT=5023   -p 5023:5023   html-server
