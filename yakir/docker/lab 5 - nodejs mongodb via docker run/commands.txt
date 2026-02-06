@@ -1,0 +1,15 @@
+http://localhost:27017/
+
+https://www.npmjs.com/package/mongoose
+
+https://hub.docker.com/_/mongo
+
+docker run -d --name mongodb -p 27020:27017 -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret mongo:latest
+
+docker exec -it mongodb bash
+
+mongosh -u root -p secret
+
+show dbs;
+
+docker inspect mongodb
