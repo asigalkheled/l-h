@@ -1,0 +1,12 @@
+install git
+
+install node
+install npm (if not installed by default)
+
+install python
+install pip (if not installed by default)
+
+install docker
+install docker compose (if not installed by default)
+
+create user in DockerHub

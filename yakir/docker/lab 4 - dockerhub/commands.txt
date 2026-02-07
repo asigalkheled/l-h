@@ -1,0 +1,18 @@
+https://hub.docker.com/repository/docker/yakirbartech/test-for-myself/general
+
+create new repository
+
+docker build -t lab4:0.0.1.1 .
+
+docker login
+
+docker tag lab4:0.0.1.1 yakirbartech/test-for-myself:lab4
+
+docker push yakirbartech/test-for-myself:lab4
+
+docker rmi yakirbartech/test-for-myself:lab4
+docker rmi lab4:0.0.1.1
+
+docker pull yakirbartech/test-for-myself:lab4
+
+docker run -d --name app -p 3000:3000 yakirbartech/test-for-myself:lab4
