@@ -1,9 +1,0 @@
-docker run -d --name app -p 3000:3000 lab3:0.0.1
-
-docker exec -it app bash
-
-docker run -d --name app -v .\index.js:/usr/src/app/index.js -p 3000:3000 lab3:0.0.1
-
-cat volume.txt 
-
-docker run -d --name app -v .\volume.txt:/usr/src/app/volume.txt -p 3000:3000 lab3:0.0.2
