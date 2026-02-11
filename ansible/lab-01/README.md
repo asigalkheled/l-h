@@ -170,7 +170,7 @@ sudo apt upgrade -y
 - Go to worker and type ifconfig in order to get the internal ip
   
 ```
-ssh sela@10.132.0.41
+ssh ansible@10.132.0.41
 ```
 
 #### ssh-keygen - SSH Key Authentication with 
