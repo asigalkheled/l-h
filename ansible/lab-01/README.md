@@ -192,7 +192,7 @@ ssh-keygen            # Overwrite - Y and press enter twice with passphrase empt
 cd .ssh
 ls -ltra              # see the files  id_rsa,id_rsa.pub, known_hosts
 cd ~
-sudo ssh-copy-id -i sela@10.132.0.41    # copy authorized_keys file to worker, (the IP on command is of worker)
+sudo ssh-copy-id -i ansible@10.132.0.41    # copy authorized_keys file to worker, (the IP on command is of worker)
 sudo vi /etc/ansible/hosts
 
         #demoservers worker server
