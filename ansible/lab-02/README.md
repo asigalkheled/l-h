@@ -82,5 +82,11 @@ EOF
 ssh ansible@ansible-slave
 exit
 ansible all -i inventory.yml -m ping
+```
+
+- Ansible Copy module
 
 ```
+echo "hello test" > hello.txt
+ansible all -i inventory.yml -m copy -a "src=hello.txt dest=/tmp/hello.txt"
+``` 
