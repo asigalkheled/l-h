@@ -89,4 +89,28 @@ ansible all -i inventory.yml -m ping
 ```
 echo "hello test" > hello.txt
 ansible all -i inventory.yml -m copy -a "src=hello.txt dest=/tmp/hello.txt"
-``` 
+```
+- Commonds
+
+```
+ansible-inventory -i inventory.ini --graph
+ansible cluster -i inventory.ini -m ping
+ansible all -i inventory.ini -m ping
+ansible-inventory -i inventory.ini --list
+ansible-inventory -i inventory.ini --list -y
+ansible all -i inventory.ini -m ping -v
+ansible all -i inventory.ini -m ping -vvv
+ansible -i inventory.ini cluster -a "echo hello Ansible"
+ansible -i inventory.ini cluster -a "df -h"
+ansible -i inventory.ini cluster -a "uptime"
+
+
+ansible cluster -i inventory.ini -m shell -a "ping -c 2 8.8.8.8"
+ansible cluster -i inventory.ini -m shell -a "hostname"
+ansible cluster -i inventory.ini -m shell -a "ping -c 1 google.com"
+ansible all -i inventory.yml -m shell -a "echo Hello from $(hostname)"
+ansible all -i inventory.ini -m shell -a "echo Hello from $(hostname)"
+  # with command
+ansible all -i inventory.yml -m command -a "echo Hello from {{ inventory_hostname }}"
+
+```
