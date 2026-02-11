@@ -36,6 +36,33 @@ docker run -d \
 
 
 ```
+docker exec -it ansible-slave sh
+apk update
+apk add openssh python3 sudo
+ssh-keygen -A
+adduser -D ansible
+echo "ansible:ansible" | chpasswd
+echo "ansible ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+/usr/sbin/sshd
+exit
+```
+
+## Start master container
+
+```
+docker run -it \
+  --name ansible-master \
+  --network ansible-net \
+  alpine:3.19 sh
+```
+
+```
+apk update
+apk add ansible openssh-client sshpass python3
+```
+- Create inventory
+
+```
 tee inventory.yml > /dev/null <<EOF
 all:
   children:
@@ -48,5 +75,12 @@ all:
           ansible_python_interpreter: /usr/bin/python3
 
 EOF
+```
+- Test SSH manually
+
+```
+ssh ansible@ansible-slave
+exit
+ansible all -i inventory.yml -m ping
 
 ```
