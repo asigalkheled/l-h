@@ -182,3 +182,30 @@ curl 172.26.0.2:80
 http:\\localhost:8080
 <html><body><h1>It works!</h1></body></html>
 ```
+
+## Playbook Stop and Start of apache web server
+
+```
+tee playbook-stop-apache.yml > /dev/null <<EOF
+- hosts: slaves
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Ensure Apache is stopped
+    shell: rc-service apache2 stop || true
+EOF
+
+```
+
+
+```
+tee playbook-start-apache.yml > /dev/null <<EOF
+- hosts: slaves
+  become: yes
+  gather_facts: no
+  tasks:
+  - name: Ensure Apache is stopped
+    shell: rc-service apache2 start || true
+EOF
+
+```
