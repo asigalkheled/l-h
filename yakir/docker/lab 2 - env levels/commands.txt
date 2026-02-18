@@ -1,0 +1,14 @@
+docker run -d --name app -e PORT=3000 -p 4000:3000 lab2:0.0.1
+
+docker logs -f app
+
+docker run -d --name app -e PORT=6000 -p 4000:6000 lab2:0.0.2
+
+top level
+
+1. inject env via cli
+2. inject env via dockerfile
+3. inject env via .env file
+4. inject variable via code level
+
+low level

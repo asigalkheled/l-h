@@ -1,0 +1,24 @@
+services:
+  lab6:
+    container_name: my-app
+    image: lab6:0.0.1
+    restart: always
+    environment:
+      MONOG_URI_COMPOSE: mongodb://root:secret@testttt:27017/admin
+  testttt:
+    image: mongo
+    container_name: my-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:secret@testttt:27017/
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+      ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
