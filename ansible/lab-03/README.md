@@ -124,3 +124,45 @@ exit
 ansible all -i inventory.yml -m ping
 ```
 
+- Run the apache play book
+
+```
+
+tee playbook-apache.yml > /dev/null <<EOF
+- hosts: slaves
+  become: yes
+  gather_facts: no
+
+   tasks:
+
+    - name: Update packages
+      apk:
+        update_cache: yes
+
+    - name: Install Apache + OpenRC
+      apk:
+        name:
+          - apache2
+          - openrc
+        state: present
+
+    - name: Create OpenRC runtime directory
+      file:
+        path: /run/openrc
+        state: directory
+
+    - name: Initialize OpenRC (Docker safe)
+      shell: |
+        openrc || true
+        touch /run/openrc/softlevel
+
+    - name: Add Apache to runlevel
+      shell: rc-update add apache2 || true
+
+    - name: Stop Apache safely
+      shell: rc-service apache2 stop || true
+
+    - name: Start Apache
+       shell: rc-service apache2 start || httpd
+
+EOF
