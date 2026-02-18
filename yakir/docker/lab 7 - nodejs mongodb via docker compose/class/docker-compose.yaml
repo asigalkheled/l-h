@@ -1,7 +1,0 @@
-services:
-  service_name:
-    container_name:
-    image:
-    restart:
-    environment:
-      env_key:
