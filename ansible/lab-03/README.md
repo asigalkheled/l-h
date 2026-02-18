@@ -166,3 +166,20 @@ tee playbook-apache.yml > /dev/null <<EOF
        shell: rc-service apache2 start || httpd
 
 EOF
+```
+- Run the playbook of apache web server
+```
+ansible-playbook -i inventory.yml playbook-apache.yml --syntax-check
+ansible-playbook -i inventory.yml playbook-apache.yml -verbose
+ansible-playbook -i inventory.yml playbook-apache.yml
+```
+- Test Locally and via the Browser
+```
+docker exec -it ansible-slave sh
+ps aux | grep httpd
+apk add curl
+curl 172.26.0.2:80
+  # Via browser
+http:\\localhost:8080
+<html><body><h1>It works!</h1></body></html>
+```
