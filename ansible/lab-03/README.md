@@ -127,13 +127,12 @@ ansible all -i inventory.yml -m ping
 - Run the apache play book
 
 ```
-
 tee playbook-apache.yml > /dev/null <<EOF
 - hosts: slaves
   become: yes
   gather_facts: no
 
-   tasks:
+  tasks:
 
     - name: Update packages
       apk:
@@ -163,7 +162,7 @@ tee playbook-apache.yml > /dev/null <<EOF
       shell: rc-service apache2 stop || true
 
     - name: Start Apache
-       shell: rc-service apache2 start || httpd
+      shell: rc-service apache2 start || httpd
 
 EOF
 ```
