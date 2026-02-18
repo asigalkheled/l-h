@@ -204,12 +204,15 @@ tee playbook-start-apache.yml > /dev/null <<EOF
   become: yes
   gather_facts: no
   tasks:
-  - name: Ensure Apache is stopped
+  - name: Add Apache to runlevel
+    shell: rc-update add apache2 || true
+  - name: Ensure Apache is start
     shell: rc-service apache2 start || true
 EOF
 
 ```
 - Commands for stop and start
+**Node:** - Run start -> stop -> and then start again
 
 ```
 ansible-playbook -i inventory.yml playbook-stop-apache.yml
