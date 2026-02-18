@@ -209,3 +209,12 @@ tee playbook-start-apache.yml > /dev/null <<EOF
 EOF
 
 ```
+- Commands for stop and start
+
+```
+ansible-playbook -i inventory.yml playbook-stop-apache.yml
+```
+ Commands for start
+```
+ansible-playbook -i inventory.yml playbook-start-apache.yml
+```
