@@ -13,7 +13,7 @@
  - Disk Information
  - Network Information
 
-    
+```
 cat /etc/alpine-release
 uname -a
 cat /proc/cpuinfo
@@ -23,7 +23,7 @@ cat /proc/meminfo
 df -h
 ip a               # add to the bash if needed      apk add iproute2
 ifconfig           # add to the bash if needed      apk add net-tools
-
+```
 
 
 ```
