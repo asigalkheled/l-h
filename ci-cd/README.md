@@ -86,4 +86,29 @@ For more options:
 - Build Environment
     - Choose Delete workspace before build starts
 
+## Lab - Create pipeline based on Jenkinsfile
+- **Docker run** based on lesson lesson-docker/practice-03/README.md
+- for plugin page, go to slash **manage**
+```
+http://host-ip:8080/manage/
+    # After Restart jenkins service, start docker container if needed
+docker start <container id>
+```
+- **Install plugin blue ocean and stage view** go to Dashboard -> Manage Jenkins -> Plugins -> Availiable plugins
+- **Set Master jenkins label to slave** go to Dashboard -> Manage Jenkins -> Nodes -> Built-In Node -> Configure
+- **Set Credential Github user**  go to Dashboard -> Manage Jenkins -> Credentials -> System -> github
+  
+  **Note** ID = github_cred all other are github value
+- make sure the url of jenkinsfile is** under public repo** as https://github.com/yehudasho/global-config-files.git
+- make sure that you branch of jenkinsfile is correct  ***/jenkins-basic-stages**
+![Alt text](pipeline-jenkinsfile.png)
+
+## Go to lesson-docker/practice-03/README.md
+- Docker run based lesson-docker/practice-03/Dockerfile
+- Change the **Branch Specifier from master to main**
+- In Repository URL = https://github.com/yehudasho/global-config-files.git
+- Jenkins File exists in  **Repo global-config-files**
+
+
+
 
