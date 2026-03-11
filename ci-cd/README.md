@@ -89,11 +89,7 @@ For more options:
 ## Lab - Create pipeline based on Jenkinsfile
 - **Docker run** based on lesson lesson-docker/practice-03/README.md
 - for plugin page, go to slash **manage**
-```
-http://host-ip:8080/manage/
-    # After Restart jenkins service, start docker container if needed
-docker start <container id>
-```
+
 - **Set Master jenkins label to slave** go to Dashboard -> Manage Jenkins -> Nodes -> Built-In Node -> Configure
 - **Set Credential Github user**  go to Dashboard -> Manage Jenkins -> Credentials -> System -> github
   
