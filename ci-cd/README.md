@@ -71,7 +71,7 @@ A Jenkins Freestyle job is a basic project type in Jenkins that allows you to ru
 
 
 
-#### Lab - Freestyle job
+#### Lab 01 - Freestyle job
 
 - Go to the **New Item** and choose **Freestyle project**
   Go to Build Steps -> Execute shell -> and type
@@ -86,7 +86,7 @@ For more options:
 - Build Environment
     - Choose Delete workspace before build starts
 
-## Lab - Create pipeline based on Jenkinsfile
+## Lab 02 - Create pipeline based on Jenkinsfile
 - **Docker run** based on lesson lesson-docker/practice-03/README.md
 - for plugin page, go to slash **manage**
 
