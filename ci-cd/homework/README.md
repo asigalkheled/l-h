@@ -7,4 +7,3 @@
 5. Run the Pipeline
 
 
-This example builds a Docker image and runs the Python app automatically via a Jenkins pipeline
