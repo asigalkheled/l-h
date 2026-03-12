@@ -94,10 +94,10 @@ For more options:
 - **Set Credential Github user**  go to Dashboard -> Manage Jenkins -> Credentials -> System -> github
   
   **Note** ID = github_cred all other are github value
-- make sure the url of jenkinsfile is** under public repo** as https://github.com/yehudasho/global-config-files.git
-- make sure that you branch of jenkinsfile is correct  ***/jenkins-basic-stages**
+- make sure the url of jenkinsfile is** under yiur public repo** as https://github.com/<profile>/<repo>.git
+- make sure that you are on correct branch of jenkinsfile is correct  **main**
   
-![Alt text](pipeline-jenkinsfile.png)
+![Alt text](pipeline-jenkinsfile-your-repo.png)
 
 - **Install plugin blue ocean and stage view** go to Dashboard -> Manage Jenkins -> Plugins -> Availiable plugins
  
