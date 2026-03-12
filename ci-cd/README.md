@@ -69,8 +69,6 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ### Freestyle job
 A Jenkins Freestyle job is a basic project type in Jenkins that allows you to run simple build, test, and deploy tasks. It is a good starting point for beginners to understand Jenkins automation
 
-
-
 #### Lab 01 - Freestyle job
 
 - Go to the **New Item** and choose **Freestyle project**
