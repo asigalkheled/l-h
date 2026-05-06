@@ -30,3 +30,11 @@ kind create cluster --name kind-01 --config kind-config.yaml
 kind get clusters
 # probably kind-01 cluster will appear
 ```
+
+- Shortcut options
+```
+echo 'source <(kubectl completion bash)' >>~/.bash_profile
+echo 'alias k=kubectl' >>~/.bash_profile
+echo 'complete -F __start_kubectl k' >>~/.bash_profile
+source ~/.bash_profile
+```
