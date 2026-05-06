@@ -60,3 +60,22 @@ kubectl describe pod example-pod​
 kubectl logs example-pod​
 ```
 
+## Solution via separate yaml files
+
+  - Create ReplicaSets (rs)
+
+```
+kubectl get pods
+kubectl get replicasets
+kubectl apply -f my-first-replicaset.yaml
+kubectl get pods
+kubectl get rs
+kubectl describe rs
+kubectl edit rs example-replicaset
+
+  # Change the number of rs from 3 to 2 and save the file
+kubectl get rs
+  # You should see 2 rs that up and running
+```
+
+
