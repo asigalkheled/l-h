@@ -1,6 +1,11 @@
-# Create Namesspace 
+# Create Namesspace
+
+- Two option to create ns
+```
 kubectl get ns
 kubectl create ns ns-my-first-pod
+```
+
 ```
   # other option is via yaml file
 cat << EOF > ns-my-first-pod.yaml 
