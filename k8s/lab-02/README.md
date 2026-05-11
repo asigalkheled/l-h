@@ -51,11 +51,11 @@ curl http://my-clusterip-service
   # Output is internally the nginx page
 ```
 
-# Test, via port forwarding
+- Run the my-pod-rs-svc.yaml file
+- Check with describe command the Service type
 
 ```
-exit
-kubectl port-forward service/my-clusterip-service 8009:80
+kubectl apply -f my-pod-rs-svc.yaml
 
 ```
 
