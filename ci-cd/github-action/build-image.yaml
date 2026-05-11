@@ -28,7 +28,7 @@ jobs:
           context: ./lesson-cicd/practice-04  # Path to the Dockerfile and build context
           push: true
           tags: |
-            dinghy123/app-node:latest-100
+            <profile of docker hub>/repo:latest-100
 
       - name: Logout from Docker Hub
         run: docker logout
