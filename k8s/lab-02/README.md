@@ -8,7 +8,7 @@ suited for different use cases.
   - LoadBalancer
   - ExternalName
     
-# Service type of ClusterIP ( Internal IP )
+# Pod type of ClusterIP ( Internal IP )
 - Cleanup if needed
 - Create pod and expose svc type of ClusterIP (Default), Based on example-pod of exercise-01​
 - Exposes the service only within the cluster​
@@ -50,7 +50,7 @@ kubectl exec -it example-pod -- sh
 curl http://my-clusterip-service
   # Output is internally the nginx page
 ```
-
+## Service with type of Cluster IP
 - Run the my-pod-rs-svc.yaml file
 - Check with describe command the Service type
 
