@@ -27,16 +27,16 @@ docker ps
 ```
 - Or pull and run it
 ```
-docker run -d -p 3300:3000 dinghy123/app-node:latest
+docker run -d -p 3300:3000 <dockerhub profile>/app-node:latest
 ``` 
 - Go to browser http://localhost:3300/
   - Output **Hello, World!**
 ## Tag and push the image into the Docker Hub
 ```
 docker images
-docker tag app-node dinghy123/app-node:latest
+docker tag app-node  <dockerhub profile>/app-node:latest
 docker login
-docker push dinghy123/app-node:latest
+docker push  <dockerhub profile>/app-node:latest
 ```
 - Go to https://hub.docker.com/ login with your account and make sure the image is pushed
 ## Integrate Docker Hub with GitHub via token
