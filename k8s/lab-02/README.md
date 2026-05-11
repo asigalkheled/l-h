@@ -59,6 +59,26 @@ kubectl apply -f my-pod-rs-svc.yaml
 
 ```
 
+### NodePort dogs-cats example 
+```
+kubectl apply -f dogs-cats.yaml
+kubectl get all
+kubectl get nodes
+kind get clusters
+kubectl config get-contexts
+kubectl get svc
+kubectl describe svc cats-service
+kubectl describe pod/cats-rs-5wq9x
+kubectl get all
+kubectl port-forward service/cats-service 30001:80
+kubectl port-forward service/dogs-service 30002:80
+
+  #Test from Browser
+http:localhost:30001
+http:localhost:30002
+```
+
+
 
 
 
