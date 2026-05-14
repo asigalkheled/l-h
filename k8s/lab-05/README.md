@@ -1,5 +1,33 @@
 # HPA
 
+
+
+```
+875  kubectl get hpa
+  876  kubectl get deployments
+  877  kubectl get deployments
+  878  kubectl get deployments
+  879  kubectl describe deployments php-apache
+  880  kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=2
+  881  kubectl get hpa
+  882  kubectl edit hpa php-apache
+  883  kubectl edit hpa php-apache
+  884  kubectl get hpa
+  885  kubectl get pods
+  886  kubectl get deployments
+  887  kubectl get hpa
+  888  kubectl get hpa --watch
+  889  kubectl get hpa --watch
+
+open new terminal
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- sh
+while sleep 0.01; do wget -q -O- http://php-apache; done
+
+back to priviouse
+kubectl get hpa --watch
+
+```
+
 ```
 kubectl delete all --all
 kubectl get deployments
