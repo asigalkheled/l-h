@@ -15,7 +15,7 @@ kind get clusters
 ```
 - Create kind cluster with port mapping
 ```
-tee kind-ingress.yaml <<EOF
+tee kind-ingress.yml <<EOF
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 
