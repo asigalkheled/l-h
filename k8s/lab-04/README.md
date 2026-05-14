@@ -82,7 +82,7 @@ kubectl rollout status deployment example-deployment
 - Rollback a Deployment:
 
 ```
-kubectl rollout undo deployment example-deployment
+Make rollback
 kubectl describe deployment example-deployment
 kubectl describe pods
 kubectl get deployments
