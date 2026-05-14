@@ -38,3 +38,5 @@ echo 'alias k=kubectl' >>~/.bash_profile
 echo 'complete -F __start_kubectl k' >>~/.bash_profile
 source ~/.bash_profile
 ```
+### 6 min k8s
+https://www.youtube.com/watch?v=TlHvYWVUZyc
