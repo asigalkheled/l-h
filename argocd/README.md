@@ -14,6 +14,12 @@ To trigger Argo CD automatically after your GitHub Actions CI pipeline, you need
 - GitHub user
 - Docker Hub user
 
+- Cleanup
+```
+kubectl delete all --all
+kubectl delete ns argocd
+```
+
 ```
 kubectl create namespace argocd
 kubectl get ns
