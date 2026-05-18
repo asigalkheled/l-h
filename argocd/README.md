@@ -64,3 +64,34 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d
 ```
 
+
+
+### Explanation of ArgCD install yaml file
+
+#### Manifest **install.yaml** file Included:
+  - This manifest includes all necessary Kubernetes objects to deploy a fully functional Argo CD instance
+
+1. Namespaces
+   Creates the argocd namespace
+2. Services
+   - argocd-server (UI & API)
+   - argocd-repo-server (clones Git repos)
+   - argocd-dex-server (OIDC authentication provider)
+   - argocd-application-controller
+   - argocd-redis (for caching)
+3. Deployments
+   - argocd-server
+   - argocd-repo-server
+   - argocd-application-controller
+   - argocd-dex-server
+   - argocd-redis
+4. RBAC / Roles
+   - Roles, RoleBindings, ServiceAccounts for internal communication and secure access
+5. ConfigMaps and Secrets
+   - Argo CD settings (argocd-cm)
+   - RBAC (argocd-rbac-cm)
+   - TLS and authentication secrets (argocd-secret)
+6. Ingress/Service (optional external access)
+   - Exposes the Argo CD UI and API (by default as a ClusterIP, but can be changed to LoadBalancer or Ingress manually).
+
+
