@@ -1,105 +1,145 @@
-# HPA
+# Horizontal Pod Autoscaler (HPA)
 
-
-
-```
-875  kubectl get hpa
-  876  kubectl get deployments
-  877  kubectl get deployments
-  878  kubectl get deployments
-  879  kubectl describe deployments php-apache
-  880  kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=2
-  881  kubectl get hpa
-  882  kubectl edit hpa php-apache
-  883  kubectl edit hpa php-apache
-  884  kubectl get hpa
-  885  kubectl get pods
-  886  kubectl get deployments
-  887  kubectl get hpa
-  888  kubectl get hpa --watch
-  889  kubectl get hpa --watch
-
-open new terminal
-kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- sh
-while sleep 0.01; do wget -q -O- http://php-apache; done
-
-back to priviouse
-kubectl get hpa --watch
-
-```
-
+- CleanUp
+- Apply Deployment
+- Install metrics-server
+- Check deployment metrics-server
+- load-generator
+- Test
+  
+## Cleanup
 ```
 kubectl delete all --all
 kubectl get deployments
+```
+
+## Apply Deployment
+```
+
 kubectl apply -f autoscaling-hpa.yaml
 kubectl get deployments
 kubectl get pods
 kubectl get svc
-
-kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=2
+kubectl top pods
+kubectl autoscale deployment php-apache --cpu-percent=10 --min=1 --max=5
 kubectl get hpa
 kubectl get hpa --watch
-new terminal
-#kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never --
+
+  # Output Error
+cpu: <unknown>/10%
+
+```
+## Install metrics-server and patch in case you got above error of cpu unknown
+
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+
+## Install patch of metrics-server
+```
+kubectl patch deployment metrics-server -n kube-system \
+  --type='json' \
+  -p='[
+    {
+      "op":"add",
+      "path":"/spec/template/spec/containers/0/args/-",
+      "value":"--kubelet-insecure-tls"
+    }
+  ]'
+```
+## Check deployment metrics-server
+
+
+```
+kubectl get hpa
+  # Edit if cpu: <unknown>/10%
+kubectl edit deployment metrics-server -n kube-system
+kubectl get pods -n kube-system | grep metrics-server
+# Make sure the Deployment is rollingUpdate Strategies and  - --kubelet-insecure-tls is exist add it if needed
+ 
+rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=10250
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+        - --kubelet-insecure-tls
+
+```
+
+## Restart metrics-server
+
+```
+kubectl rollout restart deployment metrics-server -n kube-system
+
+kubectl top nodes
+kubectl top pods
+kubectl get hpa
+
+# Output:
+NAME         REFERENCE               TARGETS   MINPODS   MAXPODS
+php-apache   Deployment/php-apache   1%/10%    1         5
+
+kubectl describe hpa
+Output:
+
+AbleToScale=True
+ScalingActive=True
+```
+
+## load-generator in order to increase the resources till the edge
+```
+# On Previous terminal run
+kubectl get hpa --watch
+ 
+  #new terminal
+kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- sh
+  # into container run 
 while sleep 0.01; do wget -q -O- http://php-apache; done
+ # Output
+# while sleep 0.01; do wget -q -O- http://php-apache; done
+OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!wget: can't connect to remote host (10.96.92.207): Connection refused
+  # Stop loader by 
+Ctrl + C 
 
-kubectl run -i --tty load-generator --image=busybox /bin/sh
+  # Output after stop, afetr few min the Replicas back to minimum
+$ kubectl get hpa --watch
+NAME         REFERENCE               TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+php-apache   Deployment/php-apache   cpu: 176%/10%   1         5         5          5m24s
+php-apache   Deployment/php-apache   cpu: 119%/10%   1         5         5          5m30s
+php-apache   Deployment/php-apache   cpu: 18%/10%    1         5         5          6m
+php-apache   Deployment/php-apache   cpu: 4%/10%     1         5         5          6m15s
+php-apache   Deployment/php-apache   cpu: 2%/10%     1         5         5          6m30s
+php-apache   Deployment/php-apache   cpu: 2%/10%     1         5         5          11m
+php-apache   Deployment/php-apache   cpu: 2%/10%     1         5         2          11m
+php-apache   Deployment/php-apache   cpu: 2%/10%     1         5         1          11m
 
-back to priviouse
 
-kubectl edit hpa php-apache
-
+```
+# Test - back to previous cli
+```
 kubectl get hpa
-kubectl get hpa
-kubectl apply -f autoscaling-hpa.yaml
+kubectl get hpa --watch
 kubectl get nodes
 kubectl get deployments
 
-Generate load to trigger scaling
-
-In a new terminal run the following command to drop into a shell on a new container
-
-kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
-  577  kubectl get hpa
-  578  kubectl delete hpa php-apache
-  579  kubectl get hpa
-  580  kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=5
-  581  kubectl get hpa
-  582  kubectl delete all --all
-  583  kubectl get pod
-  584  kubectl get svc
-  585  history
-  
-  
-  n the previous terminal watch the changes of HPA with the following command
-
-kubectl get hpa --watch
-
-You can check the running pods as well
-
 kubectl get pods
-Edit HPA configuration
 
-Edit the HPA resource to increment the maxReplicas up to 50 and the minReplicas to 3
+# Importent - Wait few min and it will back to min pods !!!
 
+# Edit HPA configuration to 10 ReplicaSet and load again from new terminal
 kubectl edit hpa php-apache
-
-Watch the HPA with the following command to see how the application is beeing scaled
-
-kubectl get hpa --watch
-
-You can check the running pods as well
-
+ #Watch the HPA with the following command to see how the application is beeing scaled
 kubectl get pods
-Check current cluster nodes
-
-Check the current nodes of your cluster and see that the nodes have been added
-
 kubectl get nodes
-
-
-kubectl run -i --tty load-generator --image=busybox /bin/sh while true; do wget -q -O - http://php-apache; done
-
-kubectl run -i --tty load-generator --image=busybox /bin/sh | while true; do wget -q -O - http://php-apache; done
+kubectl get hpa --watch
 
 ```
