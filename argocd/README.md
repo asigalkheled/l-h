@@ -47,8 +47,8 @@ kubectl get svc -n argocd -o wide --watch
 # With LB
   http://<External-IP-Address-of-LB>:80
 # With NodePort
-kubectl port-forward svc/app-node -n argocd 3300:80
-  http://localhost:3300
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+  http://localhost:8080
 ```
   - User: admin
   - Password: from command, kubectl -n argocd get secret command
